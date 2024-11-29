@@ -7,9 +7,9 @@ theme:
 
 nav:
   - Accueil: Readme.md
-  - Docker et Docker Compose: mkdocs/Docker-&-Docker-Compose.md
-  - CI/CD: mkdocs/CI-CD.md
-  - GitHub Actions: mkdocs/GithubActions.md
+  - Docker et Docker Compose: docs/Docker-&-Docker-Compose.md
+  - CI/CD: docs/CI-CD.md
+  - GitHub Actions: docs/GithubActions.md
   
 
 markdown_extensions:
