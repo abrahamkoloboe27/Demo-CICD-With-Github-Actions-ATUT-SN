@@ -9,11 +9,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: 🛑 Cancel Previous Runs
-      uses: styfle/cancel-workflow-action@0.10.1
+      uses: styfle/cancel-workflow-action@0.12.0
       with:
         access_token: ${{ secrets.PAT }}
     - name: ⬇️ Check out
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
     - run: echo "Building"
 
  
@@ -32,14 +32,8 @@ jobs:
         registry: ghcr.io
         username: ${{ github.repository_owner }}
         password: ${{ secrets.PAT }}
-    - name: 🐋 Build and push docker Backend Image
-      uses: docker/build-push-action@v6
-      with:
-        context: ./backend
-        file: ./backend/Dockerfile
-        platforms: linux/amd64, linux/arm64
-        push: true
-        tags: ghcr.io/abrahamkoloboe27/demo-cicd-atut-backend:${{ github.sha }}, ghcr.io/abrahamkoloboe27/demo-cicd-atut-backend:latest
+
+        
     - name: 🐋 Build and push docker Frontend Image
       uses: docker/build-push-action@v6
       with:
@@ -49,6 +43,15 @@ jobs:
         push: true
         tags: ghcr.io/abrahamkoloboe27/demo-cicd-atut-frontend:${{ github.sha }}, ghcr.io/abrahamkoloboe27/demo-cicd-atut-frontend:latest
 
+    - name: 🐋 Build and push docker Backend Image
+      uses: docker/build-push-action@v6
+      with:
+        context: ./backend
+        file: ./backend/Dockerfile
+        platforms: linux/amd64, linux/arm64
+        push: true
+        tags: ghcr.io/abrahamkoloboe27/demo-cicd-atut-backend:${{ github.sha }}, ghcr.io/abrahamkoloboe27/demo-cicd-atut-backend:latest
+    
   deploy:
     name: 🚀 Deploy with Docker Compose
     runs-on: ubuntu-latest
