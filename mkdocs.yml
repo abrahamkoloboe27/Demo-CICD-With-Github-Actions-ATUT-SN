@@ -1,11 +1,9 @@
 site_name: "Projet de Classification de Fruits"
 site_url: "https://abrahamkoloboe27.github.io/Demo-CICD-With-Github-Actions-ATUT-SN"
 site_description: "Documentation complète du projet, incluant Docker, Docker Compose, GitHub Actions, et CI/CD"
-# Repository
 repo_name: abrahamkoloboe27/Demo-CICD-With-Github-Actions-ATUT-SN
 repo_url: https://abrahamkoloboe27.github.io/Demo-CICD-With-Github-Actions-ATUT-SN
 
-# Copyright
 copyright: Copyright &copy; 2024 Abraham Koloboe
 
 theme:
@@ -15,10 +13,10 @@ theme:
 nav:
   - Accueil: index.md
   - Getting started:
-    - Docker et Docker Compose: Docker-&-Docker-Compose.md
-    - CI/CD: CI-CD.md
-    - GitHub Actions: GithubActions.md
-  
+      - Docker et Docker Compose: Docker-&-Docker-Compose.md
+      - CI/CD: CI-CD.md
+      - GitHub Actions: GithubActions.md
+
 markdown_extensions:
   - admonition
   - codehilite
