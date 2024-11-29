@@ -13,9 +13,9 @@ theme:
 nav:
   - Accueil: index.md
   - Getting started:
-      - Docker et Docker Compose: Docker-&-Docker-Compose.md
-      - CI/CD: CI-CD.md
-      - GitHub Actions: GithubActions.md
+      - Docker et Docker Compose: docker-et-docker-Compose.md
+      - CI/CD: ci-cd.md
+      - GitHub Actions: github-actions.md
 
 markdown_extensions:
   - admonition
