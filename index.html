@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="description" content="Documentation complète du projet, incluant Docker, Docker Compose, GitHub Actions, et CI/CD" /><link rel="canonical" href="https://abrahamkoloboe27.github.io/Demo-CICD-With-Github-Actions-ATUT-SN/" />
+      <link rel="shortcut icon" href="img/favicon.ico" />
+    <title>Projet de Classification de Fruits</title>
+    <link rel="stylesheet" href="css/theme.css" />
+    <link rel="stylesheet" href="css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Accueil";
+        var mkdocs_page_input_path = "index.md";
+        var mkdocs_page_url = "/Demo-CICD-With-Github-Actions-ATUT-SN/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="." class="icon icon-home"> Projet de Classification de Fruits
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="./search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="#">Accueil</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#table-des-matieres">📚 Table des matières</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#description-du-projet">📖 Description du Projet</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#prerequis">🔧 Prérequis</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#etapes-du-projet">🛠️ Étapes du Projet</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#1-entrainement-du-modele-de-classification">1. 🎓 Entraînement du Modèle de Classification</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#2-construction-de-lapi-backend-avec-fastapi">2. 📝 Construction de l'API Backend avec FastAPI</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#3-developpement-de-linterface-frontend-avec-vuejs">3. 💻 Développement de l'Interface Frontend avec Vue.js</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#4-conteneurisation-avec-docker">4. 🐳 Conteneurisation avec Docker</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#5-automatisation-cicd-avec-github-actions">5. 🤖 Automatisation CI/CD avec GitHub Actions</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#6-deploiement-automatise-sur-le-serveur">6. 🚀 Déploiement Automatisé sur le Serveur</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#details-du-deploiement">🔍 Détails du Déploiement</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#1-verification-et-installation-de-docker">1. 🔎 Vérification et Installation de Docker</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#2-authentification-au-registre-de-conteneurs-github">2. 🔐 Authentification au Registre de Conteneurs GitHub</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#3-pull-des-images-docker">3. 📥 Pull des Images Docker</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#4-creation-du-fichier-docker-composeyml">4. 📄 Création du Fichier docker-compose.yml</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#5-lancement-ou-mise-a-jour-des-services-avec-docker-compose">5. 🎛️ Lancement ou Mise à Jour des Services avec Docker Compose</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#execution-locale-du-projet">🏃‍♂️ Exécution Locale du Projet</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#1-construction-des-images-docker-localement">1. ⚙️ Construction des Images Docker Localement</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#2-lancement-des-conteneurs-docker">2. 🚀 Lancement des Conteneurs Docker</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#3-acces-a-lapplication-dans-le-navigateur">3. 🌐 Accès à l'Application dans le Navigateur</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#conclusion">🎉 Conclusion</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#annexes">📎 Annexes</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#exemples-de-commandes-utiles">Exemples de Commandes Utiles</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#ressources-supplementaires">Ressources Supplémentaires</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Getting started</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="docker-et-docker-Compose/">Docker et Docker Compose</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="ci-cd.md">CI/CD</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="github-actions/">GitHub Actions</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href=".">Projet de Classification de Fruits</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Accueil</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="guide-de-deploiement-automatise-dune-application-de-classification-de-fruits">🍎🚀 Guide de Déploiement Automatisé d'une Application de Classification de Fruits 🍌🎯<a class="headerlink" href="#guide-de-deploiement-automatise-dune-application-de-classification-de-fruits" title="Permanent link">&para;</a></h1>
+<h2 id="table-des-matieres">📚 Table des matières<a class="headerlink" href="#table-des-matieres" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="#-guide-de-déploiement-automatisé-dune-application-de-classification-de-fruits-">🍎🚀 Guide de Déploiement Automatisé d'une Application de Classification de Fruits 🍌🎯</a></li>
+<li><a href="#-table-des-matières">📚 Table des matières</a></li>
+<li><a href="#introduction">Introduction</a></li>
+<li><a href="#-description-du-projet">📖 Description du Projet</a></li>
+<li><a href="#-prérequis">🔧 Prérequis</a></li>
+<li><a href="#️-étapes-du-projet">🛠️ Étapes du Projet</a><ul>
+<li><a href="#1--entraînement-du-modèle-de-classification">1. 🎓 Entraînement du Modèle de Classification</a></li>
+<li><a href="#2--construction-de-lapi-backend-avec-fastapi">2. 📝 Construction de l'API Backend avec FastAPI</a></li>
+<li><a href="#3--développement-de-linterface-frontend-avec-vuejs">3. 💻 Développement de l'Interface Frontend avec Vue.js</a></li>
+<li><a href="#4--conteneurisation-avec-docker">4. 🐳 Conteneurisation avec Docker</a></li>
+<li><a href="#5--automatisation-cicd-avec-github-actions">5. 🤖 Automatisation CI/CD avec GitHub Actions</a></li>
+<li><a href="#6--déploiement-automatisé-sur-le-serveur">6. 🚀 Déploiement Automatisé sur le Serveur</a></li>
+</ul>
+</li>
+<li><a href="#-détails-du-déploiement">🔍 Détails du Déploiement</a><ul>
+<li><a href="#1--vérification-et-installation-de-docker">1. 🔎 Vérification et Installation de Docker</a></li>
+<li><a href="#2--authentification-au-registre-de-conteneurs-github">2. 🔐 Authentification au Registre de Conteneurs GitHub</a></li>
+<li><a href="#3--pull-des-images-docker">3. 📥 Pull des Images Docker</a></li>
+<li><a href="#4--création-du-fichier-docker-composeyml">4. 📄 Création du Fichier <code>docker-compose.yml</code></a></li>
+<li><a href="#5-️-lancement-ou-mise-à-jour-des-services-avec-docker-compose">5. 🎛️ Lancement ou Mise à Jour des Services avec Docker Compose</a></li>
+</ul>
+</li>
+<li><a href="#️-exécution-locale-du-projet">🏃‍♂️ Exécution Locale du Projet</a><ul>
+<li><a href="#1-️-construction-des-images-docker-localement">1. ⚙️ Construction des Images Docker Localement</a></li>
+<li><a href="#2--lancement-des-conteneurs-docker">2. 🚀 Lancement des Conteneurs Docker</a></li>
+<li><a href="#3--accès-à-lapplication-dans-le-navigateur">3. 🌐 Accès à l'Application dans le Navigateur</a></li>
+</ul>
+</li>
+<li><a href="#-conclusion">🎉 Conclusion</a></li>
+<li><a href="#-annexes">📎 Annexes</a><ul>
+<li><a href="#exemples-de-commandes-utiles">Exemples de Commandes Utiles</a></li>
+<li><a href="#ressources-supplémentaires">Ressources Supplémentaires</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
+<p>Bienvenue dans ce guide complet de déploiement automatisé d'une application de classification de fruits 🍏🍊. Ce document vous guidera à travers toutes les étapes, du développement initial à l'exécution locale et au déploiement automatisé sur un serveur distant 🌐.</p>
+<h2 id="description-du-projet">📖 Description du Projet<a class="headerlink" href="#description-du-projet" title="Permanent link">&para;</a></h2>
+<p>Le projet consiste à développer une application capable de classer des fruits à l'aide d'un modèle d'apprentissage automatique 🤖. Il est structuré de la manière suivante :</p>
+<ul>
+<li><strong>Backend</strong> (<code>Backend/</code>) : Une API développée avec <strong>FastAPI</strong> en Python 🐍, intégrant le modèle de classification entraîné.</li>
+<li><strong>Frontend</strong> (<code>Frontend/</code>) : Une application web développée avec <strong>Vue.js</strong> 🖥️, offrant une interface utilisateur interactive.</li>
+<li><strong>CI/CD</strong> : Un pipeline automatisé utilisant <strong>GitHub Actions</strong> 🛠️ pour construire et déployer les images Docker à chaque modification du code.</li>
+<li><strong>Déploiement</strong> : Un processus automatisé pour déployer les conteneurs sur un serveur distant, en s'assurant que les dépendances (Docker) sont présentes et à jour.</li>
+</ul>
+<h2 id="prerequis">🔧 Prérequis<a class="headerlink" href="#prerequis" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Docker</strong> installé sur votre machine locale 🐳.</li>
+<li><strong>Git</strong> pour cloner le dépôt 📁.</li>
+<li>Compte <strong>GitHub</strong> avec accès au <strong>GitHub Container Registry (GHCR)</strong> 🔐.</li>
+<li>Serveur distant avec accès SSH pour le déploiement 🖥️.</li>
+<li>Clé SSH pour l'authentification sans mot de passe 🔑.</li>
+<li>Connaissances de base en Docker, Docker Compose et GitHub Actions 📝.</li>
+</ul>
+<h2 id="etapes-du-projet">🛠️ Étapes du Projet<a class="headerlink" href="#etapes-du-projet" title="Permanent link">&para;</a></h2>
+<h3 id="1-entrainement-du-modele-de-classification">1. 🎓 Entraînement du Modèle de Classification<a class="headerlink" href="#1-entrainement-du-modele-de-classification" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Collecte des données</strong> : Obtenir un jeu de données d'images de fruits étiquetées 🍓🍍.</li>
+<li><strong>Prétraitement</strong> : Nettoyer et préparer les données pour l'entraînement 🧹.</li>
+<li><strong>Entraînement du modèle</strong> : Utiliser un framework de machine learning (par exemple, TensorFlow, PyTorch) pour entraîner le modèle de classification 🧠.</li>
+<li><strong>Sauvegarde du modèle</strong> : Enregistrer le modèle entraîné dans un format approprié pour une utilisation ultérieure 💾.</li>
+</ul>
+<h3 id="2-construction-de-lapi-backend-avec-fastapi">2. 📝 Construction de l'API Backend avec FastAPI<a class="headerlink" href="#2-construction-de-lapi-backend-avec-fastapi" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Création de l'application FastAPI</strong> : Initialiser une application FastAPI en Python 🐍.</li>
+<li><strong>Intégration du modèle</strong> : Charger le modèle de classification entraîné dans l'application 🎛️.</li>
+<li><strong>Définition des endpoints</strong> : Créer des routes pour permettre aux clients de soumettre des images et de recevoir des prédictions 🔄.</li>
+<li><strong>Tests locaux</strong> : Vérifier que l'API fonctionne correctement en local 🧪.</li>
+</ul>
+<h3 id="3-developpement-de-linterface-frontend-avec-vuejs">3. 💻 Développement de l'Interface Frontend avec Vue.js<a class="headerlink" href="#3-developpement-de-linterface-frontend-avec-vuejs" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Initialisation du projet Vue.js</strong> : Créer une nouvelle application Vue.js pour le frontend 🖥️.</li>
+<li><strong>Conception de l'interface utilisateur</strong> : Développer une interface permettant aux utilisateurs de télécharger des images de fruits et de visualiser les résultats de la classification 🎨.</li>
+<li><strong>Intégration avec l'API</strong> : Configurer les appels API pour interagir avec le backend FastAPI 🔗.</li>
+<li><strong>Tests locaux</strong> : S'assurer que l'interface fonctionne correctement en local 🛠️.</li>
+</ul>
+<h3 id="4-conteneurisation-avec-docker">4. 🐳 Conteneurisation avec Docker<a class="headerlink" href="#4-conteneurisation-avec-docker" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Création des Dockerfiles</strong> :</li>
+<li><strong>Backend</strong> (<code>Backend/Dockerfile</code>) : Rédiger un <code>Dockerfile</code> pour l'application FastAPI, incluant toutes les dépendances nécessaires 📄.</li>
+<li><strong>Frontend</strong> (<code>Frontend/Dockerfile</code>) : Rédiger un <code>Dockerfile</code> pour l'application Vue.js 📄.</li>
+<li><strong>Construction des images Docker</strong> :</li>
+<li><strong>Backend</strong> :
+    <code>bash
+    cd Backend
+    docker build -t demo-cicd-atut-backend .</code></li>
+<li><strong>Frontend</strong> :
+    <code>bash
+    cd Frontend
+    docker build -t demo-cicd-atut-frontend .</code></li>
+<li><strong>Tests locaux des conteneurs</strong> :</li>
+<li><strong>Backend</strong> :
+    <code>bash
+    docker run -d -p 8080:8080 demo-cicd-atut-backend</code></li>
+<li><strong>Frontend</strong> :
+    <code>bash
+    docker run -d -p 80:80 demo-cicd-atut-frontend</code></li>
+<li>Accédez à l'API via <code>http://localhost:8080</code> et au frontend via <code>http://localhost</code> 🌐.</li>
+</ul>
+<h3 id="5-automatisation-cicd-avec-github-actions">5. 🤖 Automatisation CI/CD avec GitHub Actions<a class="headerlink" href="#5-automatisation-cicd-avec-github-actions" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Création du dépôt GitHub</strong> : Héberger le code source sur GitHub 📂.</li>
+<li><strong>Configuration du GitHub Container Registry (GHCR)</strong> : Configurer GHCR pour stocker les images Docker 🗄️.</li>
+<li><strong>Mise en place de GitHub Actions</strong> :</li>
+<li><strong>Workflow de build</strong> : Créer un fichier de workflow (<code>.github/workflows/deploy.yml</code>) pour automatiser la construction et le push des images Docker à chaque modification du code ⚙️.</li>
+<li><strong>Déclencheurs</strong> : Configurer le workflow pour s'exécuter lors des push sur la branche principale 🚦.</li>
+<li><strong>Secrets GitHub</strong> : Ajouter les secrets nécessaires (<code>GHCR_PAT</code>, <code>SSH_PRIVATE_KEY</code>, <code>SERVER_HOST</code>, <code>SERVER_USER</code>, <code>SERVER_PORT</code>) dans les paramètres du dépôt 🔐.</li>
+</ul>
+<h3 id="6-deploiement-automatise-sur-le-serveur">6. 🚀 Déploiement Automatisé sur le Serveur<a class="headerlink" href="#6-deploiement-automatise-sur-le-serveur" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Script de déploiement (<code>deploy.sh</code>)</strong> :</li>
+<li>Vérifie si Docker est installé, et l'installe si nécessaire via <code>install_docker.sh</code> 🛠️.</li>
+<li>Authentifie le serveur auprès de GHCR en utilisant le token <code>GHCR_PAT</code> 🔑.</li>
+<li>Crée le fichier <code>docker-compose.yml</code> pour orchestrer les conteneurs 📄.</li>
+<li>Lance ou met à jour les services Docker Compose selon qu'ils sont déjà en cours d'exécution ou non 🚀.</li>
+</ul>
+<h2 id="details-du-deploiement">🔍 Détails du Déploiement<a class="headerlink" href="#details-du-deploiement" title="Permanent link">&para;</a></h2>
+<h3 id="1-verification-et-installation-de-docker">1. 🔎 Vérification et Installation de Docker<a class="headerlink" href="#1-verification-et-installation-de-docker" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Script <code>install_docker.sh</code></strong> :</li>
+<li>Vérifie si Docker est installé 🐳.</li>
+<li>Si non, il installe Docker en suivant les instructions officielles 🛠️.</li>
+<li>Installe également Docker Compose 📦.</li>
+</ul>
+<h3 id="2-authentification-au-registre-de-conteneurs-github">2. 🔐 Authentification au Registre de Conteneurs GitHub<a class="headerlink" href="#2-authentification-au-registre-de-conteneurs-github" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Token d'authentification (<code>GHCR_PAT</code>)</strong> :</li>
+<li>Doit avoir le scope <code>read:packages</code> pour permettre le pull des images 🔑.</li>
+<li>Est passé au serveur via les variables d'environnement lors de la connexion SSH 🌐.</li>
+<li><strong>Commande d'authentification</strong> :
+  <code>bash
+  echo $GHCR_PAT | docker login ghcr.io -u &lt;GITHUB_USERNAME&gt; --password-stdin</code></li>
+</ul>
+<h3 id="3-pull-des-images-docker">3. 📥 Pull des Images Docker<a class="headerlink" href="#3-pull-des-images-docker" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Commandes pour pull les images</strong> :
+  <code>bash
+  docker pull ghcr.io/&lt;GITHUB_USERNAME&gt;/demo-cicd-atut-frontend:latest
+  docker pull ghcr.io/&lt;GITHUB_USERNAME&gt;/demo-cicd-atut-backend:latest</code></li>
+<li><strong>Assurez-vous que les images sont accessibles</strong> :</li>
+<li>Les images doivent être publiques ou le token doit avoir les permissions nécessaires 🔐.</li>
+</ul>
+<h3 id="4-creation-du-fichier-docker-composeyml">4. 📄 Création du Fichier <code>docker-compose.yml</code><a class="headerlink" href="#4-creation-du-fichier-docker-composeyml" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Contenu du fichier</strong> :</li>
+</ul>
+<p>```yaml
+    services:
+    frontend:
+        image: ghcr.io/abrahamkoloboe27/demo-cicd-atut-frontend:latest
+        container_name: frontend
+        ports:
+        - "80:80"
+        networks:
+        - demo-cicd-atut-network
+        volumes:
+        - frontend:/usr/share/nginx/html
+    backend:
+        image: ghcr.io/abrahamkoloboe27/demo-cicd-atut-backend:latest
+        container_name: backend
+        ports:
+        - "8080:8080"
+        networks:
+        - demo-cicd-atut-network
+        volumes:
+        - backend:/app</p>
+<div class="codehilite"><pre><span></span><code><span class="n">networks</span><span class="o">:</span>
+<span class="n">demo</span><span class="o">-</span><span class="n">cicd</span><span class="o">-</span><span class="n">atut</span><span class="o">-</span><span class="n">network</span><span class="o">:</span>
+<span class="w">    </span><span class="n">driver</span><span class="o">:</span><span class="w"> </span><span class="n">bridge</span>
+
+<span class="n">volumes</span><span class="o">:</span>
+<span class="n">frontend</span><span class="o">:</span>
+<span class="n">backend</span><span class="o">:</span>
+</code></pre></div>
+
+<p>```</p>
+<ul>
+<li>
+<p><strong>Remarque</strong> : La version n'est pas spécifiée car elle est optionnelle et peut être omise 🔄.</p>
+</li>
+<li>
+<p><strong>Génération via le script <code>deploy.sh</code></strong> :</p>
+</li>
+<li>Le script crée le fichier <code>docker-compose.yml</code> dans le répertoire de déploiement 📁.</li>
+</ul>
+<h3 id="5-lancement-ou-mise-a-jour-des-services-avec-docker-compose">5. 🎛️ Lancement ou Mise à Jour des Services avec Docker Compose<a class="headerlink" href="#5-lancement-ou-mise-a-jour-des-services-avec-docker-compose" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Vérification de l'état des services</strong> :</li>
+<li>Le script vérifie si les services sont déjà en cours d'exécution avec <code>docker-compose ps -q</code> 🔍.</li>
+<li><strong>Lancement initial</strong> :</li>
+<li>Si les services ne tournent pas, le script exécute <code>docker-compose up -d</code> pour les démarrer 🚀.</li>
+<li><strong>Mise à jour des services</strong> :</li>
+<li>Si les services tournent déjà, le script exécute <code>docker-compose pull</code> pour récupérer les nouvelles images, puis <code>docker-compose up -d</code> pour appliquer les changements 🔄.</li>
+</ul>
+<h2 id="execution-locale-du-projet">🏃‍♂️ Exécution Locale du Projet<a class="headerlink" href="#execution-locale-du-projet" title="Permanent link">&para;</a></h2>
+<h3 id="1-construction-des-images-docker-localement">1. ⚙️ Construction des Images Docker Localement<a class="headerlink" href="#1-construction-des-images-docker-localement" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p><strong>Cloner le dépôt GitHub</strong> :
+  <code>bash
+  git clone https://github.com/&lt;GITHUB_USERNAME&gt;/&lt;REPOSITORY_NAME&gt;.git
+  cd &lt;REPOSITORY_NAME&gt;</code></p>
+</li>
+<li>
+<p><strong>Backend</strong> :
+  <code>bash
+  cd Backend
+  docker build -t demo-cicd-atut-backend .</code></p>
+</li>
+<li>
+<p><strong>Frontend</strong> :
+  <code>bash
+  cd ../Frontend
+  docker build -t demo-cicd-atut-frontend .</code></p>
+</li>
+</ul>
+<h3 id="2-lancement-des-conteneurs-docker">2. 🚀 Lancement des Conteneurs Docker<a class="headerlink" href="#2-lancement-des-conteneurs-docker" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Backend</strong> :
+  <code>bash
+  docker run -d -p 8080:8080 demo-cicd-atut-backend</code></li>
+<li>
+<p>L'API est maintenant accessible sur <code>http://localhost:8080</code> 🌐.</p>
+</li>
+<li>
+<p><strong>Frontend</strong> :
+  <code>bash
+  docker run -d -p 80:80 demo-cicd-atut-frontend</code></p>
+</li>
+<li>Le frontend est accessible sur <code>http://localhost</code> 🌐.</li>
+</ul>
+<h3 id="3-acces-a-lapplication-dans-le-navigateur">3. 🌐 Accès à l'Application dans le Navigateur<a class="headerlink" href="#3-acces-a-lapplication-dans-le-navigateur" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Accéder au frontend</strong> :</li>
+<li>Ouvrez votre navigateur et rendez-vous sur <code>http://localhost</code> 🖥️.</li>
+<li><strong>Interaction avec l'API</strong> :</li>
+<li>Le frontend communique avec l'API backend qui tourne sur le port <code>8080</code> 🔄.</li>
+<li><strong>Tester l'application</strong> :</li>
+<li>Téléchargez une image de fruit et visualisez la prédiction 🍌➡️🤖.</li>
+</ul>
+<h2 id="conclusion">🎉 Conclusion<a class="headerlink" href="#conclusion" title="Permanent link">&para;</a></h2>
+<p>Vous avez maintenant une application de classification de fruits entièrement fonctionnelle 🍇🍉, que vous pouvez exécuter localement ou déployer sur un serveur distant 🚀. Ce guide vous a accompagné à travers toutes les étapes, de la construction du modèle à l'automatisation du déploiement avec CI/CD 🤖.</p>
+<h2 id="annexes">📎 Annexes<a class="headerlink" href="#annexes" title="Permanent link">&para;</a></h2>
+<h3 id="exemples-de-commandes-utiles">Exemples de Commandes Utiles<a class="headerlink" href="#exemples-de-commandes-utiles" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Génération d'une paire de clés SSH</strong> 🔑 :
+  <code>bash
+  ssh-keygen -t rsa -b 4096 -C "github-actions" -f github_actions_key</code></li>
+<li><strong>Ajout de la clé publique au serveur</strong> :
+  <code>bash
+  cat github_actions_key.pub &gt;&gt; ~/.ssh/authorized_keys</code></li>
+<li><strong>Définition manuelle de la variable <code>GHCR_PAT</code> sur le serveur</strong> :
+  <code>bash
+  export GHCR_PAT=your_personal_access_token</code></li>
+<li><strong>Test de l'authentification au GHCR sur le serveur</strong> :
+  <code>bash
+  echo $GHCR_PAT | docker login ghcr.io -u &lt;GITHUB_USERNAME&gt; --password-stdin</code></li>
+</ul>
+<h3 id="ressources-supplementaires">Ressources Supplémentaires<a class="headerlink" href="#ressources-supplementaires" title="Permanent link">&para;</a></h3>
+<ul>
+<li><a href="https://docs.docker.com/">Documentation de Docker</a> 🐳</li>
+<li><a href="https://docs.docker.com/compose/">Documentation de Docker Compose</a> 📦</li>
+<li><a href="https://docs.github.com/actions">Documentation de GitHub Actions</a> 🤖</li>
+<li><a href="https://fastapi.tiangolo.com/">Documentation de FastAPI</a> 🐍</li>
+<li><a href="https://vuejs.org/">Documentation de Vue.js</a> 🖥️</li>
+</ul>
+<p><strong>Note</strong> : Assurez-vous de remplacer <code>&lt;GITHUB_USERNAME&gt;</code> par votre nom d'utilisateur GitHub réel dans les commandes et configurations, et <code>&lt;REPOSITORY_NAME&gt;</code> par le nom de votre dépôt 📛.</p>
+<p>🎊 Merci d'avoir suivi ce guide ! N'hésitez pas à contribuer au projet ou à poser des questions si vous rencontrez des difficultés. Bonne continuation dans vos projets de développement ! 🚀</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="docker-et-docker-Compose/" class="btn btn-neutral float-right" title="Docker et Docker Compose">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+      <p>Copyright &copy; 2024 Abraham Koloboe</p>
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://abrahamkoloboe27.github.io/Demo-CICD-With-Github-Actions-ATUT-SN" class="fa fa-code-fork" style="color: #fcfcfc"> abrahamkoloboe27/Demo-CICD-With-Github-Actions-ATUT-SN</a>
+        </span>
+    
+    
+    
+      <span><a href="docker-et-docker-Compose/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = ".";</script>
+    <script src="js/theme_extra.js"></script>
+    <script src="js/theme.js"></script>
+      <script src="search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
+
+<!--
+MkDocs version : 1.6.1
+Build Date UTC : 2024-11-29 21:39:04.420505+00:00
+-->

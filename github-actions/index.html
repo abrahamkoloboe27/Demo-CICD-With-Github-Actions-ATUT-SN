@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://abrahamkoloboe27.github.io/Demo-CICD-With-Github-Actions-ATUT-SN/github-actions/" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>GitHub Actions - Projet de Classification de Fruits</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "GitHub Actions";
+        var mkdocs_page_input_path = "github-actions.md";
+        var mkdocs_page_url = "/Demo-CICD-With-Github-Actions-ATUT-SN/github-actions/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> Projet de Classification de Fruits
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Accueil</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Getting started</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../docker-et-docker-Compose/">Docker et Docker Compose</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../ci-cd.md">CI/CD</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">GitHub Actions</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#table-des-matieres">Table des matières</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#quest-ce-que-github-actions">Qu'est-ce que GitHub Actions ?</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#concepts-cles">Concepts Clés</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#ecrire-un-workflow">Écrire un Workflow</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#exemple-de-structure">Exemple de Structure</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#trouver-et-utiliser-des-actions">Trouver et Utiliser des Actions</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#ou-trouver-des-actions">Où Trouver des Actions ?</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#utiliser-une-action">Utiliser une Action</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#creer-une-action-personnalisee">Créer une Action Personnalisée</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#ressources-et-documentation">Ressources et Documentation</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#exemples-de-workflows">Exemples de Workflows</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#1-build-et-push-dune-image-docker">1. Build et Push d'une Image Docker</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#2-execution-de-tests-automatises">2. Exécution de Tests Automatisés</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#conclusion">Conclusion</a>
+    </li>
+    </ul>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">Projet de Classification de Fruits</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Getting started</li>
+      <li class="breadcrumb-item active">GitHub Actions</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="github-actions-automatisation-simplifiee-pour-vos-projets">GitHub Actions : Automatisation Simplifiée pour Vos Projets<a class="headerlink" href="#github-actions-automatisation-simplifiee-pour-vos-projets" title="Permanent link">&para;</a></h1>
+<h2 id="table-des-matieres">Table des matières<a class="headerlink" href="#table-des-matieres" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="#github-actions--automatisation-simplifiée-pour-vos-projets">GitHub Actions : Automatisation Simplifiée pour Vos Projets</a></li>
+<li><a href="#table-des-matières">Table des matières</a></li>
+<li><a href="#introduction">Introduction</a></li>
+<li><a href="#quest-ce-que-github-actions-">Qu'est-ce que GitHub Actions ?</a></li>
+<li><a href="#concepts-clés">Concepts Clés</a></li>
+<li><a href="#écrire-un-workflow">Écrire un Workflow</a><ul>
+<li><a href="#exemple-de-structure">Exemple de Structure</a></li>
+</ul>
+</li>
+<li><a href="#trouver-et-utiliser-des-actions">Trouver et Utiliser des Actions</a><ul>
+<li><a href="#où-trouver-des-actions-">Où Trouver des Actions ?</a></li>
+<li><a href="#utiliser-une-action">Utiliser une Action</a></li>
+<li><a href="#créer-une-action-personnalisée">Créer une Action Personnalisée</a></li>
+</ul>
+</li>
+<li><a href="#ressources-et-documentation">Ressources et Documentation</a></li>
+<li><a href="#exemples-de-workflows">Exemples de Workflows</a><ul>
+<li><a href="#1-build-et-push-dune-image-docker">1. Build et Push d'une Image Docker</a></li>
+<li><a href="#2-exécution-de-tests-automatisés">2. Exécution de Tests Automatisés</a></li>
+</ul>
+</li>
+<li><a href="#conclusion">Conclusion</a></li>
+</ul>
+<h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
+<p>Bienvenue dans cette section dédiée à <strong>GitHub Actions</strong> ! GitHub Actions est une puissante plateforme d'intégration continue et de déploiement continu (CI/CD) intégrée directement dans GitHub. Elle permet d'automatiser, personnaliser et exécuter vos workflows de développement logiciel directement depuis votre dépôt GitHub.</p>
+<h2 id="quest-ce-que-github-actions">Qu'est-ce que GitHub Actions ?<a class="headerlink" href="#quest-ce-que-github-actions" title="Permanent link">&para;</a></h2>
+<p><strong>GitHub Actions</strong> est un service d'automatisation proposé par GitHub, permettant aux développeurs de créer des workflows personnalisés pour automatiser des tâches telles que :</p>
+<ul>
+<li><strong>Intégration Continue (CI)</strong> : Compiler et tester votre code à chaque push ou pull request.</li>
+<li><strong>Déploiement Continu (CD)</strong> : Déployer automatiquement vos applications sur des serveurs ou des services cloud.</li>
+<li><strong>Automatisation de Tâches</strong> : Gérer des tâches répétitives comme la gestion des issues, la mise à jour des dépendances, etc.</li>
+</ul>
+<p>Avec GitHub Actions, vous pouvez définir des workflows qui s'exécutent en réponse à des événements spécifiques dans votre dépôt GitHub.</p>
+<h2 id="concepts-cles">Concepts Clés<a class="headerlink" href="#concepts-cles" title="Permanent link">&para;</a></h2>
+<p>Avant de plonger dans l'écriture des workflows, voici quelques concepts fondamentaux de GitHub Actions :</p>
+<ul>
+<li><strong>Workflow</strong> :</li>
+<li>Un workflow est un ensemble automatisé de tâches définies dans un fichier YAML situé dans le répertoire <code>.github/workflows/</code> de votre dépôt.</li>
+<li>Il est déclenché par des événements spécifiques (comme un push, une pull request, etc.).</li>
+<li><strong>Action</strong> :</li>
+<li>Une action est une unité réutilisable de code qui peut être incluse dans vos workflows.</li>
+<li>Les actions peuvent être créées par la communauté ou par vous-même pour accomplir des tâches spécifiques.</li>
+<li><strong>Runner</strong> :</li>
+<li>Un runner est une machine (auto-hébergée ou hébergée par GitHub) qui exécute les jobs de vos workflows.</li>
+<li><strong>Job</strong> :</li>
+<li>Un job est une série de steps (étapes) exécutées sur le même runner.</li>
+<li>Les jobs peuvent être parallélisés ou dépendants les uns des autres.</li>
+<li><strong>Step</strong> :</li>
+<li>Une step est une tâche unique exécutée dans un job, pouvant être une commande shell ou une action.</li>
+<li><strong>Event</strong> :</li>
+<li>Un event est une action qui déclenche un workflow, comme un push, une issue ouverte, ou un planificateur (cron).</li>
+</ul>
+<h2 id="ecrire-un-workflow">Écrire un Workflow<a class="headerlink" href="#ecrire-un-workflow" title="Permanent link">&para;</a></h2>
+<p>Les workflows sont définis dans des fichiers YAML situés dans le répertoire <code>.github/workflows/</code> de votre dépôt. Voici la structure de base d'un fichier de workflow :</p>
+<div class="codehilite"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Nom du Workflow</span>
+
+<span class="nt">on</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">événement</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">branche</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">type d&#39;événement</span><span class="p p-Indicator">]</span>
+
+<span class="nt">jobs</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">nom_du_job</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ubuntu-latest</span>
+
+<span class="w">    </span><span class="nt">steps</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Étape 1</span>
+<span class="w">        </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">action/nom@version</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Étape 2</span>
+<span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">commande à exécuter</span>
+</code></pre></div>
+
+<h3 id="exemple-de-structure">Exemple de Structure<a class="headerlink" href="#exemple-de-structure" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>name</strong> : Nom du workflow (affiché dans l'interface GitHub Actions).</li>
+<li><strong>on</strong> : Définition des événements qui déclenchent le workflow.</li>
+<li><strong>jobs</strong> : Liste des jobs à exécuter.</li>
+<li><strong>runs-on</strong> : Système d'exploitation du runner (par exemple, <code>ubuntu-latest</code>).</li>
+<li><strong>steps</strong> : Étapes individuelles au sein du job.<ul>
+<li><strong>uses</strong> : Utilisation d'une action GitHub.</li>
+<li><strong>run</strong> : Exécution d'une commande shell.</li>
+</ul>
+</li>
+</ul>
+<h2 id="trouver-et-utiliser-des-actions">Trouver et Utiliser des Actions<a class="headerlink" href="#trouver-et-utiliser-des-actions" title="Permanent link">&para;</a></h2>
+<h3 id="ou-trouver-des-actions">Où Trouver des Actions ?<a class="headerlink" href="#ou-trouver-des-actions" title="Permanent link">&para;</a></h3>
+<p>GitHub propose un <strong>Marketplace</strong> où vous pouvez trouver des milliers d'actions créées par la communauté et par GitHub lui-même :</p>
+<ul>
+<li><a href="https://github.com/marketplace?type=actions">GitHub Marketplace - Actions</a></li>
+</ul>
+<h3 id="utiliser-une-action">Utiliser une Action<a class="headerlink" href="#utiliser-une-action" title="Permanent link">&para;</a></h3>
+<p>Pour utiliser une action dans votre workflow, vous pouvez référencer son chemin ou son nom dans la section <code>uses</code>. Par exemple, pour utiliser l'action officielle checkout :</p>
+<div class="codehilite"><pre><span></span><code><span class="nt">steps</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Checkout Repository</span>
+<span class="w">    </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/checkout@v3</span>
+</code></pre></div>
+
+<h3 id="creer-une-action-personnalisee">Créer une Action Personnalisée<a class="headerlink" href="#creer-une-action-personnalisee" title="Permanent link">&para;</a></h3>
+<p>Si les actions disponibles ne répondent pas à vos besoins, vous pouvez créer la vôtre. Voici les étapes de base :</p>
+<ol>
+<li><strong>Créer un Répertoire</strong> pour votre action, par exemple <code>.github/actions/mon-action</code>.</li>
+<li><strong>Définir un fichier <code>action.yml</code></strong> avec les métadonnées de l'action.</li>
+<li><strong>Ajouter le Code</strong> de votre action (scripts, Dockerfile, etc.).</li>
+</ol>
+<p>Pour plus de détails, consultez la <a href="https://docs.github.com/actions/creating-actions">documentation officielle sur la création d'actions</a>.</p>
+<h2 id="ressources-et-documentation">Ressources et Documentation<a class="headerlink" href="#ressources-et-documentation" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Documentation Officielle de GitHub Actions</strong> :</li>
+<li><a href="https://docs.github.com/actions/learn-github-actions/introduction-to-github-actions">Introduction à GitHub Actions</a></li>
+<li><a href="https://docs.github.com/actions/using-workflows/workflow-syntax-for-github-actions">Définir des Workflows</a></li>
+<li><a href="https://github.com/marketplace?type=actions">GitHub Actions Marketplace</a></li>
+<li><strong>Tutoriels et Guides</strong> :</li>
+<li><a href="https://docs.github.com/actions/quickstart">Guide de Démarrage Rapide</a></li>
+<li><a href="https://docs.github.com/actions/creating-actions/creating-a-javascript-action">Créer une Action Personnalisée</a></li>
+<li><strong>Communauté et Support</strong> :</li>
+<li><a href="https://github.community/c/code-to-cloud/github-actions/61">GitHub Community Discussions</a></li>
+<li><a href="https://stackoverflow.com/questions/tagged/github-actions">Stack Overflow - Tag GitHub Actions</a></li>
+</ul>
+<h2 id="exemples-de-workflows">Exemples de Workflows<a class="headerlink" href="#exemples-de-workflows" title="Permanent link">&para;</a></h2>
+<h3 id="1-build-et-push-dune-image-docker">1. Build et Push d'une Image Docker<a class="headerlink" href="#1-build-et-push-dune-image-docker" title="Permanent link">&para;</a></h3>
+<p>Ce workflow est déclenché à chaque push sur la branche principale. Il construit une image Docker et la pousse vers GitHub Container Registry (GHCR).</p>
+<div class="codehilite"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Build and Push Docker Image</span>
+
+<span class="nt">on</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">push</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">branches</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="nv">main</span><span class="w"> </span><span class="p p-Indicator">]</span>
+
+<span class="nt">jobs</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">build</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ubuntu-latest</span>
+
+<span class="w">    </span><span class="nt">steps</span><span class="p">:</span>
+<span class="w">      </span><span class="c1"># Checkout du code source</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Checkout Repository</span>
+<span class="w">        </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/checkout@v3</span>
+
+<span class="w">      </span><span class="c1"># Configuration de Docker Buildx</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Set up Docker Buildx</span>
+<span class="w">        </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">docker/setup-buildx-action@v2</span>
+
+<span class="w">      </span><span class="c1"># Login à GHCR</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Login to GitHub Container Registry</span>
+<span class="w">        </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">docker/login-action@v2</span>
+<span class="w">        </span><span class="nt">with</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">registry</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ghcr.io</span>
+<span class="w">          </span><span class="nt">username</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${{ github.actor }}</span>
+<span class="w">          </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${{ secrets.GHCR_PAT }}</span>
+
+<span class="w">      </span><span class="c1"># Build et push de l&#39;image Docker</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Build and Push Docker Image</span>
+<span class="w">        </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">docker/build-push-action@v4</span>
+<span class="w">        </span><span class="nt">with</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">push</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">          </span><span class="nt">tags</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ghcr.io/${{ github.repository_owner }}/demo-cicd-atut-backend:latest</span>
+</code></pre></div>
+
+<p><strong>Explications :</strong></p>
+<ul>
+<li><strong>Checkout Repository</strong> : Récupère le code source du dépôt.</li>
+<li><strong>Set up Docker Buildx</strong> : Configure Docker Buildx pour la construction avancée d'images.</li>
+<li><strong>Login to GHCR</strong> : Authentifie Docker auprès de GitHub Container Registry en utilisant le secret <code>GHCR_PAT</code>.</li>
+<li><strong>Build and Push Docker Image</strong> : Construit l'image Docker et la pousse vers GHCR avec le tag <code>latest</code>.</li>
+</ul>
+<h3 id="2-execution-de-tests-automatises">2. Exécution de Tests Automatisés<a class="headerlink" href="#2-execution-de-tests-automatises" title="Permanent link">&para;</a></h3>
+<p>Ce workflow exécute des tests unitaires à chaque pull request vers la branche principale.</p>
+<div class="codehilite"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Run Tests</span>
+
+<span class="nt">on</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">pull_request</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">branches</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="nv">main</span><span class="w"> </span><span class="p p-Indicator">]</span>
+
+<span class="nt">jobs</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">test</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ubuntu-latest</span>
+
+<span class="w">    </span><span class="nt">steps</span><span class="p">:</span>
+<span class="w">      </span><span class="c1"># Checkout du code source</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Checkout Repository</span>
+<span class="w">        </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/checkout@v3</span>
+
+<span class="w">      </span><span class="c1"># Configuration de Python</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Set up Python</span>
+<span class="w">        </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/setup-python@v4</span>
+<span class="w">        </span><span class="nt">with</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">python-version</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;3.9&#39;</span>
+
+<span class="w">      </span><span class="c1"># Installation des dépendances</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Install Dependencies</span>
+<span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">          </span><span class="no">python -m pip install --upgrade pip</span>
+<span class="w">          </span><span class="no">pip install -r requirements.txt</span>
+
+<span class="w">      </span><span class="c1"># Exécution des tests</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Run Tests</span>
+<span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">          </span><span class="no">pytest</span>
+</code></pre></div>
+
+<p><strong>Explications :</strong></p>
+<ul>
+<li><strong>Checkout Repository</strong> : Récupère le code source du dépôt.</li>
+<li><strong>Set up Python</strong> : Configure l'environnement Python avec la version spécifiée.</li>
+<li><strong>Install Dependencies</strong> : Installe les dépendances nécessaires à l'aide de <code>pip</code>.</li>
+<li><strong>Run Tests</strong> : Exécute les tests unitaires avec <code>pytest</code>.</li>
+</ul>
+<h2 id="conclusion">Conclusion<a class="headerlink" href="#conclusion" title="Permanent link">&para;</a></h2>
+<p>GitHub Actions est un outil puissant et flexible pour automatiser vos workflows de développement logiciel. Que ce soit pour construire et déployer vos applications, exécuter des tests automatisés ou gérer des tâches répétitives, GitHub Actions simplifie le processus et améliore l'efficacité de votre équipe.</p>
+<p>En intégrant GitHub Actions dans votre projet de classification de fruits, vous bénéficiez d'une automatisation complète, garantissant que chaque modification de code est testée, construite et déployée de manière cohérente et fiable.</p>
+<p><strong>Bon déploiement et automatisation avec GitHub Actions !</strong></p>
+<p>Pour toute question ou assistance supplémentaire, n'hésitez pas à consulter la <a href="https://docs.github.com/actions">documentation officielle</a> ou à rejoindre les <a href="https://github.community/c/code-to-cloud/github-actions/61">discussions de la communauté</a>.</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../docker-et-docker-Compose/" class="btn btn-neutral float-left" title="Docker et Docker Compose"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+      <p>Copyright &copy; 2024 Abraham Koloboe</p>
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://abrahamkoloboe27.github.io/Demo-CICD-With-Github-Actions-ATUT-SN" class="fa fa-code-fork" style="color: #fcfcfc"> abrahamkoloboe27/Demo-CICD-With-Github-Actions-ATUT-SN</a>
+        </span>
+    
+    
+      <span><a href="../docker-et-docker-Compose/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
