@@ -33,7 +33,7 @@ jobs:
         registry: ghcr.io
         username: ${{ github.repository_owner }}
         password: ${{ secrets.PAT }} # `PAT` is a secret that contains your Personal Access Token with `write:packages` scope
-    - name: 🐋 Build and push docker API Image
+    - name: 🐋 Build and push docker Backend Image
       uses: docker/build-push-action@v6
       with:
         context: ./backend
@@ -41,7 +41,7 @@ jobs:
         platforms: linux/amd64, linux/arm64
         push: true
         tags: ghcr.io/abrahamkoloboe27/demo-cicd-atut-backend:${{ github.sha }}, ghcr.io/abrahamkoloboe27/demo-cicd-atut-backend:latest
-    - name: 🐋 Build and push docker API Image
+    - name: 🐋 Build and push docker Frontend Image
       uses: docker/build-push-action@v6
       with:
         context: ./frontend
