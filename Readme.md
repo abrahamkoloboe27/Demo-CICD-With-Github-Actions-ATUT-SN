@@ -2,28 +2,32 @@
 
 ## 📚 Table des matières
 
-1. [Introduction](#introduction)
-2. [📖 Description du Projet](#description-du-projet)
-3. [🔧 Prérequis](#prérequis)
-4. [🛠️ Étapes du Projet](#étapes-du-projet)
-   - [1. 🎓 Entraînement du Modèle de Classification](#1-🎓-entraînement-du-modèle-de-classification)
-   - [2. 📝 Construction de l'API Backend avec FastAPI](#2-📝-construction-de-lapi-backend-avec-fastapi)
-   - [3. 💻 Développement de l'Interface Frontend avec Vue.js](#3-💻-développement-de-linterface-frontend-avec-vuejs)
-   - [4. 🐳 Conteneurisation avec Docker](#4-🐳-conteneurisation-avec-docker)
-   - [5. 🤖 Automatisation CI/CD avec GitHub Actions](#5-🤖-automatisation-cicd-avec-github-actions)
-   - [6. 🚀 Déploiement Automatisé sur le Serveur](#6-🚀-déploiement-automatisé-sur-le-serveur)
-5. [🔍 Détails du Déploiement](#🔍-détails-du-déploiement)
-   - [1. 🔎 Vérification et Installation de Docker](#1-🔎-vérification-et-installation-de-docker)
-   - [2. 🔐 Authentification au Registre de Conteneurs GitHub](#2-🔐-authentification-au-registre-de-conteneurs-github)
-   - [3. 📥 Pull des Images Docker](#3-📥-pull-des-images-docker)
-   - [4. 📄 Création du Fichier docker-compose.yml](#4-📄-création-du-fichier-docker-composeyml)
-   - [5. 🎛️ Lancement ou Mise à Jour des Services avec Docker Compose](#5-🎛️-lancement-ou-mise-à-jour-des-services-avec-docker-compose)
-6. [🏃‍♂️ Exécution Locale du Projet](#🏃‍♂️-exécution-locale-du-projet)
-   - [1. ⚙️ Construction des Images Docker Localement](#1-⚙️-construction-des-images-docker-localement)
-   - [2. 🚀 Lancement des Conteneurs Docker](#2-🚀-lancement-des-conteneurs-docker)
-   - [3. 🌐 Accès à l'Application dans le Navigateur](#3-🌐-accès-à-lapplication-dans-le-navigateur)
-7. [🎉 Conclusion](#🎉-conclusion)
-8. [📎 Annexes](#📎-annexes)
+- [🍎🚀 Guide de Déploiement Automatisé d'une Application de Classification de Fruits 🍌🎯](#-guide-de-déploiement-automatisé-dune-application-de-classification-de-fruits-)
+  - [📚 Table des matières](#-table-des-matières)
+  - [Introduction](#introduction)
+  - [📖 Description du Projet](#-description-du-projet)
+  - [🔧 Prérequis](#-prérequis)
+  - [🛠️ Étapes du Projet](#️-étapes-du-projet)
+    - [1. 🎓 Entraînement du Modèle de Classification](#1--entraînement-du-modèle-de-classification)
+    - [2. 📝 Construction de l'API Backend avec FastAPI](#2--construction-de-lapi-backend-avec-fastapi)
+    - [3. 💻 Développement de l'Interface Frontend avec Vue.js](#3--développement-de-linterface-frontend-avec-vuejs)
+    - [4. 🐳 Conteneurisation avec Docker](#4--conteneurisation-avec-docker)
+    - [5. 🤖 Automatisation CI/CD avec GitHub Actions](#5--automatisation-cicd-avec-github-actions)
+    - [6. 🚀 Déploiement Automatisé sur le Serveur](#6--déploiement-automatisé-sur-le-serveur)
+  - [🔍 Détails du Déploiement](#-détails-du-déploiement)
+    - [1. 🔎 Vérification et Installation de Docker](#1--vérification-et-installation-de-docker)
+    - [2. 🔐 Authentification au Registre de Conteneurs GitHub](#2--authentification-au-registre-de-conteneurs-github)
+    - [3. 📥 Pull des Images Docker](#3--pull-des-images-docker)
+    - [4. 📄 Création du Fichier `docker-compose.yml`](#4--création-du-fichier-docker-composeyml)
+    - [5. 🎛️ Lancement ou Mise à Jour des Services avec Docker Compose](#5-️-lancement-ou-mise-à-jour-des-services-avec-docker-compose)
+  - [🏃‍♂️ Exécution Locale du Projet](#️-exécution-locale-du-projet)
+    - [1. ⚙️ Construction des Images Docker Localement](#1-️-construction-des-images-docker-localement)
+    - [2. 🚀 Lancement des Conteneurs Docker](#2--lancement-des-conteneurs-docker)
+    - [3. 🌐 Accès à l'Application dans le Navigateur](#3--accès-à-lapplication-dans-le-navigateur)
+  - [🎉 Conclusion](#-conclusion)
+  - [📎 Annexes](#-annexes)
+    - [Exemples de Commandes Utiles](#exemples-de-commandes-utiles)
+    - [Ressources Supplémentaires](#ressources-supplémentaires)
 
 ---
 
@@ -158,31 +162,31 @@ Le projet consiste à développer une application capable de classer des fruits 
 - **Contenu du fichier** :
 
   ```yaml
-  services:
+    services:
     frontend:
-      image: ghcr.io/<GITHUB_USERNAME>/demo-cicd-atut-frontend:latest
-      container_name: frontend
-      ports:
+        image: ghcr.io/abrahamkoloboe27/demo-cicd-atut-frontend:latest
+        container_name: frontend
+        ports:
         - "80:80"
-      networks:
+        networks:
         - demo-cicd-atut-network
-      volumes:
-        - frontend
+        volumes:
+        - frontend:/usr/share/nginx/html
     backend:
-      image: ghcr.io/<GITHUB_USERNAME>/demo-cicd-atut-backend:latest
-      container_name: backend
-      ports:
+        image: ghcr.io/abrahamkoloboe27/demo-cicd-atut-backend:latest
+        container_name: backend
+        ports:
         - "8080:8080"
-      networks:
+        networks:
         - demo-cicd-atut-network
-      volumes:
-        - backend
+        volumes:
+        - backend:/app
 
-  networks:
+    networks:
     demo-cicd-atut-network:
-      driver: bridge
+        driver: bridge
 
-  volumes:
+    volumes:
     frontend:
     backend:
   ```
