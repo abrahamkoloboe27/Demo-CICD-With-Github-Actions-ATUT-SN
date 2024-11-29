@@ -18,8 +18,6 @@ echo "Création du dossier '$DEPLOYMENT_DIR' et du fichier 'docker-compose.yml'.
 mkdir -p "$DEPLOYMENT_DIR"
 
 cat > $DEPLOYMENT_DIR/docker-compose.yml << EOF
-version: '3'
-
 services:
   frontend:
     image: ghcr.io/abrahamkoloboe27/demo-cicd-atut-frontend:latest
