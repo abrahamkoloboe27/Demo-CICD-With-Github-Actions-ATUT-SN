@@ -77,8 +77,10 @@ jobs:
           host: ${{ secrets.SERVER_HOST }}
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          envs: GHCR_PAT=${{ secrets.PAT }}
+          envs: |
+            GHCR_PAT=${{ secrets.PAT }}
+            SERVER_USER=${{ secrets.SERVER_USER }}
           script: |
-            cd /home/${{ secrets.SERVER_USER }}/deployment
+            cd /home/$SERVER_USER/deployment
             chmod +x deploy.sh
             ./deploy.sh
