@@ -32,7 +32,7 @@ services:
     image: ghcr.io/abrahamkoloboe27/demo-cicd-atut-backend:latest
     container_name: backend
     ports:
-      - "5000:5000"
+      - "8080:8080"
     networks:
       - demo-cicd-atut-network
     volumes:

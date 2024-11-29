@@ -1,5 +1,5 @@
 services:
-  frontend : 
+  frontend:
     image: ghcr.io/abrahamkoloboe27/demo-cicd-atut-frontend:latest
     container_name: frontend
     ports:
@@ -7,21 +7,21 @@ services:
     networks:
       - demo-cicd-atut-network
     volumes:
-      - frontend
-  backend :
+      - frontend:/usr/share/nginx/html
+  backend:
     image: ghcr.io/abrahamkoloboe27/demo-cicd-atut-backend:latest
     container_name: backend
     ports:
-      - "5000:5000"
+      - "8080:8080"
     networks:
       - demo-cicd-atut-network
     volumes:
-      - backend
+      - backend:/app
 
 networks:
   demo-cicd-atut-network:
     driver: bridge
-  
+
 volumes:
   frontend:
   backend:
