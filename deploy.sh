@@ -27,7 +27,7 @@ services:
     networks:
       - demo-cicd-atut-network
     volumes:
-      - frontend
+      - frontend:/usr/share/nginx/html
   backend:
     image: ghcr.io/abrahamkoloboe27/demo-cicd-atut-backend:latest
     container_name: backend
@@ -36,7 +36,7 @@ services:
     networks:
       - demo-cicd-atut-network
     volumes:
-      - backend
+      - backend:/app
 
 networks:
   demo-cicd-atut-network:
