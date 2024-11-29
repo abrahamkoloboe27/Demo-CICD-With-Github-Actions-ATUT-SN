@@ -49,3 +49,36 @@ jobs:
         platforms: linux/amd64, linux/arm64
         push: true
         tags: ghcr.io/abrahamkoloboe27/demo-cicd-atut-frontend:${{ github.sha }}, ghcr.io/abrahamkoloboe27/demo-cicd-atut-frontend:latest
+
+  deploy:
+    name: 🚀 Deploy with Docker Compose
+    runs-on: ubuntu-latest
+    needs: build-and-push-github-container-registry
+    steps:
+      - name: ⬇️ Check out
+        uses: actions/checkout@v4
+      - name: 🐋 Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      # Étape 5 : Copier les scripts sur le serveur
+      - name: Copy scripts to server
+        uses: appleboy/scp-action@v0.1.3
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          source: "./deploy.sh,./install_docker.sh"
+          target: "/home/${{ secrets.SERVER_USER }}/deployment"
+
+      # Étape 6 : Déployer sur le serveur via SSH en exécutant le script 'deploy.sh'
+      - name: Deploy to Server via SSH
+        uses: appleboy/ssh-action@v0.1.5
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          envs: GHCR_PAT=${{ secrets.PAT }}
+          script: |
+            cd /home/${{ secrets.SERVER_USER }}/deployment
+            chmod +x deploy.sh
+            ./deploy.sh
