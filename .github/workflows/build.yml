@@ -12,7 +12,7 @@ jobs:
     - name: 🛑 Cancel Previous Runs
       uses: styfle/cancel-workflow-action@0.10.1
       with:
-        access_token: ${{ secrets.PAT }}
+        access_token: ${{ secrets.GITHUB_TOKEN }}
     - name: ⬇️ Check out
       uses: actions/checkout@v3
     - run: echo "Building"
@@ -32,12 +32,12 @@ jobs:
       with:
         registry: ghcr.io
         username: ${{ github.repository_owner }}
-        password: ${{ secrets.PAT }} # `PAT` is a secret that contains your Personal Access Token with `write:packages` scope
+        password: ${{ secrets.GITHUB_TOKEN }}
     - name: 🐋 Build and push docker Backend Image
       uses: docker/build-push-action@v6
       with:
         context: ./backend
-        file: Dockerfile
+        file: ./backend/Dockerfile
         platforms: linux/amd64, linux/arm64
         push: true
         tags: ghcr.io/abrahamkoloboe27/demo-cicd-atut-backend:${{ github.sha }}, ghcr.io/abrahamkoloboe27/demo-cicd-atut-backend:latest
@@ -45,7 +45,7 @@ jobs:
       uses: docker/build-push-action@v6
       with:
         context: ./frontend
-        file: Dockerfile
+        file: ./frontend/Dockerfile
         platforms: linux/amd64, linux/arm64
         push: true
         tags: ghcr.io/abrahamkoloboe27/demo-cicd-atut-frontend:${{ github.sha }}, ghcr.io/abrahamkoloboe27/demo-cicd-atut-frontend:latest
