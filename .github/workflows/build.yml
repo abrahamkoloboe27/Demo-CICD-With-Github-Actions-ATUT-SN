@@ -68,7 +68,7 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           source: "./deploy.sh,./install_docker.sh"
-          target: "/home/${{ secrets.SERVER_USER }}/deployment"
+          target: "/deployment"
 
       # Étape 6 : Déployer sur le serveur via SSH en exécutant le script 'deploy.sh'
       - name: Deploy to Server via SSH
@@ -81,6 +81,6 @@ jobs:
             GHCR_PAT=${{ secrets.PAT }}
             SERVER_USER=${{ secrets.SERVER_USER }}
           script: |
-            cd /home/$SERVER_USER/deployment
+            cd /deployment
             chmod +x deploy.sh
             ./deploy.sh
