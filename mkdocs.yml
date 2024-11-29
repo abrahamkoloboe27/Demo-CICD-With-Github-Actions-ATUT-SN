@@ -6,10 +6,10 @@ theme:
   language: 'fr'
 
 nav:
-  - Accueil: Readme.md
-  - Docker et Docker Compose: Docker-&-Docker-Compose.md
-  - CI/CD: CI-CD.md
-  - GitHub Actions: GithubActions.md
+  - Accueil: 'Readme.md'
+  - "Docker et Docker Compose": 'Docker-&-Docker-Compose.md'
+  - "CI/CD": 'CI-CD.md'
+  - "GitHub Actions": 'GithubActions.md'
   
 
 markdown_extensions:
