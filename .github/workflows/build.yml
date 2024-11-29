@@ -3,7 +3,11 @@ on:
   push:
     branches:
       - main
-
+  
+  workflow_run:
+    workflows: ["Mkdocs"]
+    types:
+      - completed
 jobs:
   cancel-previous-runs:
     name: 🧹 Cancel previous runs
