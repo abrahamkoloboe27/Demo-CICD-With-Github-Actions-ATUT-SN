@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'http://0.0.0.0:8080/predict';
+const API_URL ='http://0.0.0.0:8080/predict';
 
 export interface PredictionResponse {
   predicted_class: string;
