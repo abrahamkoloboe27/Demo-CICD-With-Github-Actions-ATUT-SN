@@ -2,14 +2,14 @@ site_name: "Documentation du Projet de Classification de Fruits"
 site_url: "https://abrahamkoloboe27.github.io/Demo-CICD-With-Github-Actions-ATUT-SN"
 site_description: "Documentation complète du projet, incluant Docker, Docker Compose, GitHub Actions, et CI/CD"
 theme:
-  name: material
+  name: readthedocs
   language: 'fr'
 
 nav:
   - Accueil: Readme.md
-  - Docker et Docker Compose: docs/Docker-&-Docker-Compose.md
-  - CI/CD: docs/CI-CD.md
-  - GitHub Actions: docs/GithubActions.md
+  - Docker et Docker Compose: Docker-&-Docker-Compose.md
+  - CI/CD: CI-CD.md
+  - GitHub Actions: GithubActions.md
   
 
 markdown_extensions:
