@@ -1,8 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import { useRouter } from 'vue-router';
+// Suppression de l'import inutilisé de useRouter
 
-const router = useRouter();
 const isNavCollapsed = ref(true);
 
 const toggleNav = () => {
