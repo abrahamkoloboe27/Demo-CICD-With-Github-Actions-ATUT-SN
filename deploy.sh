@@ -53,7 +53,7 @@ cd "$DEPLOYMENT_DIR"
 
 # Vérifier si les services sont déjà en cours d'exécution
 services_running=$(docker-compose ps -q)
-docker-compose pull
+
 if [ -z "$services_running" ]; then
   echo "Les services ne tournent pas encore. Lancement avec 'docker-compose up -d'..."
   docker-compose up -d

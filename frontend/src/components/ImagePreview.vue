@@ -1,13 +1,15 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue';
 
-const props = defineProps<{
+const props = withDefaults(defineProps<{
   file: File | null;
-}>();
+}>(), {
+  file: null
+});
 
 const imageUrl = ref<string>('');
 
-watch(() => props.file, (newFile) => {
+watch(() => props.file, (newFile: File | null) => {
   if (imageUrl.value) {
     URL.revokeObjectURL(imageUrl.value);
   }

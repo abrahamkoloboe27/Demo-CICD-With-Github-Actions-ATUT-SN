@@ -59,8 +59,6 @@ jobs:
     steps:
       - name: ⬇️ Check out
         uses: actions/checkout@v4
-      - name: 🐋 Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
 
       # Étape 5 : Copier les scripts sur le serveur
       - name: Copy scripts to server

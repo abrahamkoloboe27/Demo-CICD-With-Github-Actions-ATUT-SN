@@ -22,7 +22,8 @@ logging.basicConfig(
 
 # Configuration des origines autorisées
 origins = [
-
+    "http://localhost",
+    "http://localhost:80",    # Pour d'autres services
     "*"                         # Pour autoriser toutes les origines
 ]
 

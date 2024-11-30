@@ -20,21 +20,21 @@ const apiClient = axios.create({
 
 // Add request interceptor for handling errors
 apiClient.interceptors.request.use(
-  (config) => {
+  (config: any) => {
     // You can add any request preprocessing here
     return config;
   },
-  (error) => {
+  (error: any) => {
     return Promise.reject(error);
   }
 );
 
 // Add response interceptor for handling errors
 apiClient.interceptors.response.use(
-  (response) => {
+  (response: any) => {
     return response;
   },
-  (error) => {
+  (error: any) => {
     if (error.response) {
       // Handle specific error cases
       switch (error.response.status) {
