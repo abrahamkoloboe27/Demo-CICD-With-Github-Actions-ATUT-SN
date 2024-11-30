@@ -2,11 +2,14 @@ import keras
 import numpy as np
 import logging
 from fastapi import FastAPI, UploadFile, File
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 import os
 import shutil
 import warnings
 warnings.filterwarnings("ignore")
+
+
 
 # Configuration du logging
 logging.basicConfig(
@@ -14,7 +17,17 @@ logging.basicConfig(
     format='%(asctime)s - %(levelname)s - %(message)s'
 )
 
-# Description détaillée de l'API
+
+# Après l'initialisation de app = FastAPI(...)
+
+# Configuration des origines autorisées
+origins = [
+
+    "*"                         # Pour autoriser toutes les origines
+]
+
+
+
 description = """
 ## API de Classification d'Images de Fruits 🍎🍌
 
@@ -39,6 +52,15 @@ app = FastAPI(
         "name": "Abraham KOLOBOE",
         "email": "abklb27@gmail.com"
     }
+)
+
+# Ajout du middleware CORS
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],        # Autorise toutes les méthodes HTTP
+    allow_headers=["*"]         # Autorise tous les headers
 )
 
 # Taille des images attendues par le modèle
