@@ -93,6 +93,7 @@ async def startup_event():
     Charge le modèle de deep learning en mémoire.
     """
     load_model()
+    logging.info('Démarrage de l\'application.')
 
 def get_class_names():
     """
@@ -117,6 +118,7 @@ async def read_root():
     Returns:
         dict: Message de bienvenue.
     """
+    logging.info("Accès à l'endpoint racine.")
     return {"message": "Bienvenue sur l'API de Classification d'Images de Fruits 🍓🍍"}
 
 @app.post("/predict", tags=["Prédiction"])
@@ -133,6 +135,7 @@ async def predict(file: UploadFile = File(...)):
     Raises:
         JSONResponse: En cas d'erreur, retourne un message d'erreur avec le statut HTTP approprié.
     """
+    logging.info("Requête POST sur l'endpoint /predict.")
     try:
         # Enregistrement du fichier uploadé dans un répertoire temporaire
         file_location = f"temp/{file.filename}"
@@ -148,7 +151,7 @@ async def predict(file: UploadFile = File(...)):
 
         # Suppression du fichier temporaire
         os.remove(file_location)
-
+        logging.info(f"Classe prédite : {predicted_class_name}, Score de confiance : {confidence}")
         # Retour de la réponse JSON avec la classe prédite et le score de confiance
         return JSONResponse(content={
             "predicted_class": predicted_class_name,

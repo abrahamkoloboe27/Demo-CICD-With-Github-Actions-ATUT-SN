@@ -13,6 +13,7 @@ export const predictImage = async (file: File): Promise<PredictionResponse> => {
 
   const response = await axios.post<PredictionResponse>(API_URL, formData, {
     headers: {
+      'accept': 'application/json',
       'Content-Type': 'multipart/form-data',
     },
   });
