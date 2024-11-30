@@ -1,41 +1,29 @@
 <script setup lang="ts">
-import { ref } from 'vue';
 import ImageUploader from '../components/ImageUploader.vue';
 import ImagePreview from '../components/ImagePreview.vue';
 import PredictionResult from '../components/PredictionResult.vue';
 import LoadingSpinner from '../components/LoadingSpinner.vue';
-import { predictImage } from '../services/api';
+import { useImageUpload } from '../composables/useImageUpload';
+import { usePrediction } from '../composables/usePrediction';
 
-const selectedFile = ref<File | null>(null);
-const predictedClass = ref<string>('');
-const confidence = ref<number>(0);
-const error = ref<string>('');
-const isLoading = ref<boolean>(false);
+const { 
+  selectedFile, 
+  imageUrl, 
+  error: uploadError, 
+  handleFileChange 
+} = useImageUpload();
 
-const handleFileSelected = (file: File) => {
-  selectedFile.value = file;
-  error.value = '';
-  predictedClass.value = '';
-  confidence.value = 0;
-};
+const {
+  predictedClass,
+  confidence,
+  isLoading,
+  error: predictionError,
+  predict
+} = usePrediction();
 
 const handlePredict = async () => {
-  if (!selectedFile.value) {
-    error.value = 'Veuillez sélectionner une image.';
-    return;
-  }
-
-  try {
-    isLoading.value = true;
-    error.value = '';
-    const result = await predictImage(selectedFile.value);
-    predictedClass.value = result.predicted_class;
-    confidence.value = result.confidence;
-  } catch (e) {
-    error.value = 'Une erreur est survenue lors de la prédiction. Veuillez réessayer.';
-    console.error('Prediction error:', e);
-  } finally {
-    isLoading.value = false;
+  if (selectedFile.value) {
+    await predict(selectedFile.value);
   }
 };
 </script>
@@ -48,7 +36,7 @@ const handlePredict = async () => {
           <div class="card-body">
             <h2 class="card-title text-center mb-4">Classifier une Image de Fruit 🍎</h2>
             
-            <ImageUploader @file-selected="handleFileSelected" />
+            <ImageUploader @file-selected="handleFileChange" />
             <ImagePreview :file="selectedFile" />
             
             <div class="mt-3 text-center">
@@ -62,8 +50,8 @@ const handlePredict = async () => {
               </button>
             </div>
 
-            <div v-if="error" class="alert alert-danger mt-3">
-              {{ error }}
+            <div v-if="uploadError || predictionError" class="alert alert-danger mt-3">
+              {{ uploadError || predictionError }}
             </div>
 
             <PredictionResult

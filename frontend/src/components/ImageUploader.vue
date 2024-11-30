@@ -1,11 +1,7 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-
 const emit = defineEmits<{
   (e: 'fileSelected', file: File): void
 }>();
-
-const fileInput = ref<HTMLInputElement | null>(null);
 
 const handleFileChange = (event: Event) => {
   const input = event.target as HTMLInputElement;
@@ -19,7 +15,6 @@ const handleFileChange = (event: Event) => {
   <div class="image-uploader">
     <input
       type="file"
-      ref="fileInput"
       @change="handleFileChange"
       accept="image/jpeg,image/png,image/jpg"
       class="form-control"

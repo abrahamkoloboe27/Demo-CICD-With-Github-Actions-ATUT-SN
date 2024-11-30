@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL ='http://0.0.0.0:8080/predict';
+const API_URL = 'https://abrahamklb-fruits-recognition-api.hf.space/predict';
 
 export interface PredictionResponse {
   predicted_class: string;
@@ -16,6 +16,6 @@ export const predictImage = async (file: File): Promise<PredictionResponse> => {
       'Content-Type': 'multipart/form-data',
     },
   });
- 
+
   return response.data;
 };
