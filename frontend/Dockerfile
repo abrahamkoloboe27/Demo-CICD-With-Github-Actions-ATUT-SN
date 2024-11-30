@@ -1,5 +1,5 @@
 # Build stage
-FROM node:18-slim AS build-stage
+FROM node:18.20.3 AS build-stage
 
 WORKDIR /app
 
