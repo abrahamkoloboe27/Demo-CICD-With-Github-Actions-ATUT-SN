@@ -16,6 +16,6 @@ export const predictImage = async (file: File): Promise<PredictionResponse> => {
       'Content-Type': 'multipart/form-data',
     },
   });
-
+ 
   return response.data;
 };
