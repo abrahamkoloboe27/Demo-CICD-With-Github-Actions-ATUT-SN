@@ -1,11 +1,11 @@
-# Stage 1: Build stage🎤 imagine not Lavel the post🤔 I'd like to imagine difficult difficulty your girl the top point is of it, the player said come on
+# Stage 1: Build stage🎤 imagine 
 FROM python:3.10-slim AS builder
 
 # Set environment variables
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 
-# Set the working directory song song so I don't know if you said to
+# Set the working directory 
 WORKDIR /app
 
 
@@ -37,4 +37,4 @@ COPY . /app
 EXPOSE 8080 
 
 # Run the application
-CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8080"] find you
+CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8080"]
