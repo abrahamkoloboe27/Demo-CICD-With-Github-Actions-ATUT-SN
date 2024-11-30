@@ -1,16 +1,16 @@
-# Stage 1: Build stage
+# Stage 1: Build stage🎤 imagine not Lavel the post🤔 I'd like to imagine difficult difficulty your girl the top point is of it, the player said come on
 FROM python:3.10-slim AS builder
 
 # Set environment variables
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 
-# Set the working directory
+# Set the working directory song song so I don't know if you said to
 WORKDIR /app
 
 
-# Install the dependencies
-COPY requirements.txt .
+# Install the dependencies demo install
+COPY requirements.txt . 
 RUN pip install --no-cache-dir --upgrade pip
 RUN pip install  -r requirements.txt
 
@@ -34,7 +34,7 @@ COPY --from=builder /app /app
 COPY . /app
 
 # Expose the port the app runs on
-EXPOSE 8080
+EXPOSE 8080 
 
 # Run the application
-CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8080"]
+CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8080"] find you
